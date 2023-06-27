@@ -1,6 +1,5 @@
 .metadata
 .metadata/
-.plugins/
-.mylyn/
+**/metadata/*
 search.py
 *-notes.txt
