@@ -1,3 +1,4 @@
 *.metadata/
 search.py
 *-notes.txt
+.metadata/.plugins/org.eclipse.wst.sse.core/task-tags.properties
