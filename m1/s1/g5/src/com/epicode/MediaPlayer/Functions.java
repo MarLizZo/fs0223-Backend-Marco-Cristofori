@@ -230,11 +230,11 @@ public class Functions {
 						System.out.println();
 						vid.play();
 						System.out.println();
-					} else {
-						System.out.println();
-						System.out.println(">> Nessun elemento trovato all'indice specificato! <<");
-						System.out.println();
-					}
+					} 
+				} else {
+					System.out.println();
+					System.out.println(">> Nessun elemento trovato all'indice specificato! <<");
+					System.out.println();
 				}
 			} catch (NumberFormatException ex) {
 				System.out.println("*****************");
