@@ -1,0 +1,5 @@
+14:40:25.148 [main] INFO  com.epicode.ex_2.Exercise_2 - 62993
+14:40:29.948 [main] INFO  com.epicode.ex_2.Exercise_2 - 71060
+14:40:33.225 [main] INFO  com.epicode.ex_2.Exercise_2 - 63481
+15:29:17.176 [main] ERROR com.epicode.ex_3.Exercise_3 - Errore nel caricamento del file!
+15:29:36.054 [main] ERROR com.epicode.ex_3.Exercise_3 - Errore nel caricamento del file! java.nio.file.NoSuchFileException: doc\test.txt
