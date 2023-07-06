@@ -36,7 +36,7 @@ public class Main {
 		lizzoOrder.add(book_1); lizzoOrder.add(ps5_1); lizzoOrder.add(boys_2);
 
 		List<Product> umbertoOrder = new ArrayList<Product>();
-		umbertoOrder.add(monitor_1);
+		umbertoOrder.add(monitor_1); umbertoOrder.add(toy_1);
 
 		List<Product> emanueleOrder = new ArrayList<Product>();
 		emanueleOrder.add(monitor_1); emanueleOrder.add(boys_1);
@@ -53,8 +53,15 @@ public class Main {
 		list.add(monitor_1); list.add(ps5_1);
 		list.add(toy_1); list.add(toy_2); list.add(toy_3);
 		list.add(boys_1); list.add(boys_2);
-		
-		
+
+		Order order_1 = new Order(1, "Delivered", LocalDate.of(2021, 2, 6), LocalDate.of(2021, 2, 11), lizzoOrder, lizzo);
+		Order order_2 = new Order(2, "Delivered", LocalDate.of(2021, 2, 14), LocalDate.of(2021, 2, 21), umbertoOrder, umberto);
+		Order order_3 = new Order(3, "Delivered", LocalDate.of(2022, 4, 24), LocalDate.of(2022, 4, 28), emanueleOrder, emanuele);
+		Order order_4 = new Order(4, "Delivered", LocalDate.of(2023, 5, 7), LocalDate.of(2023, 5, 10), misteriosoOrder, misterioso);
+		Order order_5 = new Order(5, "Delivered", LocalDate.of(2023, 2, 1), LocalDate.of(2023, 2, 6), anonimoOrder, anonimo);
+
+		List<Order> listOrders = new ArrayList<Order>();
+		listOrders.add(order_1); listOrders.add(order_2); listOrders.add(order_3); listOrders.add(order_4); listOrders.add(order_5);
 		
 		// Esercizio uno
 		System.out.println("***** INIZIO EX 1 *****");
@@ -65,7 +72,10 @@ public class Main {
 		
 		// Esercizio due
 		System.out.println("***** INIZIO EX 2 *****");
-		list.stream().filter(el -> el.getCategory().equals("Baby")).forEach(el -> System.out.println(el.toString()));
+		Stream<Order> stOrd = listOrders.stream();
+		List<Product> prodOrd = new ArrayList<Product>();
+		stOrd.forEach(el -> el.getProducts().forEach(p -> prodOrd.add(p)));
+		prodOrd.stream().filter(el -> el.getCategory().equals("Baby")).forEach(el -> System.out.println(el));
 		
 		System.out.println();
 		
@@ -82,13 +92,6 @@ public class Main {
 		
 		//Esercizio quattro
 		System.out.println("***** INIZIO EX 4 *****");
-		Order order_1 = new Order(1, "Delivered", LocalDate.of(2021, 2, 6), LocalDate.of(2021, 2, 11), lizzoOrder, lizzo);
-		Order order_2 = new Order(2, "Delivered", LocalDate.of(2021, 2, 14), LocalDate.of(2021, 2, 21), umbertoOrder, umberto);
-		Order order_3 = new Order(3, "Delivered", LocalDate.of(2022, 4, 24), LocalDate.of(2022, 4, 28), emanueleOrder, emanuele);
-		Order order_4 = new Order(4, "Delivered", LocalDate.of(2023, 5, 7), LocalDate.of(2023, 5, 10), misteriosoOrder, misterioso);
-		
-		List<Order> listOrders = new ArrayList<Order>();
-		listOrders.add(order_1); listOrders.add(order_2); listOrders.add(order_3); listOrders.add(order_4);
 		
 		Stream<Order> orders = listOrders.stream();
 		orders.filter(el -> el.getCustomer().getTier() == 2 && el.getOrderDate().isAfter(LocalDate.of(2021, 2, 1)) 
