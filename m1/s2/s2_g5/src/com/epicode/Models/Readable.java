@@ -1,20 +1,19 @@
-package com.epicode.WeeklyProject.Models;
-
+package com.epicode.Models;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
-
-import com.epicode.WeeklyProject.Functions;
 
 public abstract class Readable {
 	private String ISBN;
 	private String title;
 	private LocalDate publishedDate;
 	private Integer pages;
-	protected static List<Readable> readableList = new ArrayList<Readable>();
+	protected static Set<Readable> readableList = new HashSet<Readable>();
 	
 	public Readable(String iSBN, String title, LocalDate publishedDate, Integer pages) {
 		this.ISBN = iSBN;
@@ -39,7 +38,7 @@ public abstract class Readable {
 		return pages;
 	}
 	
-	public static List<Readable> getAllReadables() {
+	public static Set<Readable> getAllReadables() {
 		return readableList;
 	}
 	
@@ -69,7 +68,7 @@ public abstract class Readable {
 		return ls.stream().filter(el -> el.getAuthor().equals(aut)).collect(Collectors.toList());
 	}
 	
-	public static void setList(List<Readable> ls) throws IOException {
+	public static void setList(Set<Readable> ls) throws IOException {
 		readableList = ls;
 	}
 
@@ -79,26 +78,3 @@ public abstract class Readable {
 				+ "]";
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

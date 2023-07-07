@@ -1,25 +1,26 @@
-package com.epicode.WeeklyProject;
+package com.epicode.Main;
+
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
 import org.apache.commons.io.FileUtils;
 
-import com.epicode.WeeklyProjcect.Enums.Genre;
-import com.epicode.WeeklyProjcect.Enums.Periodicita;
-import com.epicode.WeeklyProject.Models.Author;
-import com.epicode.WeeklyProject.Models.Book;
-import com.epicode.WeeklyProject.Models.Magazine;
-import com.epicode.WeeklyProject.Models.Readable;
+import com.epicode.Enums.Genre;
+import com.epicode.Enums.Periodicita;
+import com.epicode.Models.*;
+import com.epicode.Models.Readable;
 
 public class Functions {
 	private static File file = new File("doc/test.txt");
 	
-	public static void saveArchive(List<Readable> ls) throws IOException {
-		
+	public static void saveArchive(Set<Readable> ls) throws IOException {
+		if (file.exists()) file.delete();
 		StringBuilder text = new StringBuilder();
 		
 		ls.forEach(el -> {
@@ -43,7 +44,6 @@ public class Functions {
 			}
 			text.append("#");
 		});
-		//System.out.println("stringa: " + text);
 		FileUtils.writeStringToFile(file, text.toString(), "UTF-8", true);
 	}
 	
@@ -51,7 +51,7 @@ public class Functions {
 		String text = FileUtils.readFileToString(file, "UTF-8");
 		String[] splitted = text.split("#");
 		
-		List<Readable> lsFinal = new ArrayList<Readable>();
+		Set<Readable> lsFinal = new HashSet<Readable>();
 		
 		for (int i = 0; i < splitted.length; i++) {
 			String[] singleReadable = splitted[i].split("@");
@@ -77,30 +77,5 @@ public class Functions {
 			}
 			Readable.setList(lsFinal);
 		}
-		
-		//List<String> splitted = Arrays.asList(text.split("#"));
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

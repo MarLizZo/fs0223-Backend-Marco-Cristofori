@@ -1,4 +1,4 @@
-package com.epicode.WeeklyProjcect.Enums;
+package com.epicode.Enums;
 
 public enum Genre {
 	FICTION,

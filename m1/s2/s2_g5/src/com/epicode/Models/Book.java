@@ -1,10 +1,12 @@
-package com.epicode.WeeklyProject.Models;
+package com.epicode.Models;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
-import com.epicode.WeeklyProjcect.Enums.Genre;
+import com.epicode.Enums.Genre;
 
 public class Book extends Readable {
 	private Author author;
@@ -24,9 +26,9 @@ public class Book extends Readable {
 		return generes;
 	}
 	
-	public static List<Book> getAllBooks() {
-		List<Book> lsbook = new ArrayList<Book>();
-		lsbook = (List<Book>) getAllReadables().stream().filter(el -> el instanceof Book);
+	public static Set<Readable> getAllBooks() {
+		Set<Readable> lsbook = new HashSet<Readable>();
+		lsbook = getAllReadables().stream().filter(el -> el instanceof Book).collect(Collectors.toSet());
 		return lsbook;
 	}
 
@@ -36,27 +38,3 @@ public class Book extends Readable {
 				+ getTitle() + ", PublishedDate=" + getPublishedDate() + ", Pages=" + getPages() + "]";
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

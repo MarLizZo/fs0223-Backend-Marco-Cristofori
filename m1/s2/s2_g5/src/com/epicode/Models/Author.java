@@ -1,4 +1,4 @@
-package com.epicode.WeeklyProject.Models;
+package com.epicode.Models;
 
 public class Author {
 	private Integer id;

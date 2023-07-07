@@ -1,8 +1,8 @@
-package com.epicode.WeeklyProject.Models;
+package com.epicode.Models;
 
 import java.time.LocalDate;
 
-import com.epicode.WeeklyProjcect.Enums.Periodicita;
+import com.epicode.Enums.Periodicita;
 
 public class Magazine extends Readable {
 	private Periodicita periodicita;
