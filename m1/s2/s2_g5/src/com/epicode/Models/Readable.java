@@ -1,5 +1,4 @@
 package com.epicode.Models;
-import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -50,7 +49,7 @@ public abstract class Readable {
 		readableList.add(element);
 	}
 	
-	public static boolean removeElement(String isbn) {
+	public static boolean removeByISBN(String isbn) {
 		return readableList.removeIf(el -> el.getISBN().equals(isbn));
 	}
 	
@@ -58,17 +57,17 @@ public abstract class Readable {
 		return readableList.stream().filter(el -> el.getISBN().equals(isbn)).findFirst();
 	}
 	
-	public static List<Book> searchByAuthor(Author aut) {
+	public static List<Book> searchByAuthor(String name) {
 		List<Book> ls = new ArrayList<Book>();
 		readableList.forEach(el -> {
 			if (el instanceof Book) {
 				ls.add((Book) el);
 			}
 		});
-		return ls.stream().filter(el -> el.getAuthor().equals(aut)).collect(Collectors.toList());
+		return ls.stream().filter(el -> el.getAuthor().getName().toLowerCase().equals(name.toLowerCase())).collect(Collectors.toList());
 	}
 	
-	public static void setList(Set<Readable> ls) throws IOException {
+	public static void setList(Set<Readable> ls) {
 		readableList = ls;
 	}
 
