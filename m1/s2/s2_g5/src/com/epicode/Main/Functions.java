@@ -44,7 +44,7 @@ public class Functions {
 				.append(el.getPublishedDate().toString() + "@").append(el.getPages().toString() + "@");
 			if (isBook) {
 				Book b = (Book) el;
-				text.append(b.getAuthor().getName() + "@").append(b.getAuthor().getId().toString() + "@");
+				text.append(b.getAuthor().getName() + "@").append(Integer.toString(b.getAuthor().getId()) + "@");
 				b.getGeneres().forEach(g -> text.append(g.toString() + "&"));
 			} else {
 				Magazine m = (Magazine) el;
@@ -69,8 +69,8 @@ public class Functions {
 			Integer pages = Integer.parseInt(singleReadable[4]);
 			
 			if (singleReadable[0].contains("book")) {
-				String authorId = singleReadable[5];
-				String authorName = singleReadable[6];
+				String authorName = singleReadable[5];
+				String authorId = singleReadable[6];
 				List<Genre> genres = new ArrayList<Genre>();
 				String[] genresArr = singleReadable[7].split("&");
 				
@@ -87,29 +87,24 @@ public class Functions {
 		}
 	}
 
-	public static void initializeList() throws NumberFormatException, ExitException {
+	public static void initializeList() throws NumberFormatException, ExitException, IOException {
 		System.out.println("0 > Esci dal programma");
 		System.out.println("1 > Carica da file doc/test.txt");
 		System.out.println("2 > Istanzio gli oggetti e creo la lista tramite codice");
-		System.out.print("Come preferisci procedere? ->> ");
+		System.out.print(">>> Come preferisci procedere? ->> ");
 		
 		int input = Integer.parseInt(sc.nextLine());
 		
 		if (input == 1) {
-			try {
-				Functions.readArchive();
-				initialized = true;
-			} catch (IOException ex) {
-				log.error("Errore imprevisto nel caricamento del file.. " + ex.getMessage());
-			}
+			Functions.readArchive();
+			initialized = true;
 		} else if (input == 2) {
 			Readable.setList(createElements());
 			initialized = true;
 		} else if (input == 0) {
-			System.out.println("Arrivederci!");
 			try {
 				Thread.sleep(1000);
-				throw new ExitException("Exited!");
+				throw new ExitException("Arrivederci e grazie!");
 			} catch (InterruptedException e) {
 				log.error("Mmmh qualcosa di strano sta succedendo.. " + e.getMessage());
 			}
@@ -119,21 +114,22 @@ public class Functions {
 		}
 	}
 	
-	public static void chooseOperation() throws NumberFormatException {
+	public static void chooseOperation() throws NumberFormatException, IOException {
 		System.out.println("0 > Esci dal programma");
 		System.out.println("1 > Visualizza tutti i libri e riviste");
 		System.out.println("2 > Cerca un elemento tramite il suo ISBN");
 		System.out.println("3 > Rimuovi un elemento dalla lista tramite il suo ISBN");
 		System.out.println("4 > Cerca elementi tramite un anno di pubblicazione");
 		System.out.println("5 > Cerca elementi tramite il nome dell'autore");
+		System.out.println("6 > Salva la lista attuale su File doc/test.txt");
 		
-		System.out.print("Quale operazione vuoi eseguire? ->> ");
+		System.out.print(">>> Quale operazione vuoi eseguire? ->> ");
 		int input = Integer.parseInt(sc.nextLine());
 		
 		switch (input) {
 			case 0: {
 				System.out.println();
-				System.out.println("Arrivederci!");
+				System.out.println("Arrivederci e grazie!");
 				exitFlag = true;
 				break;
 			}
@@ -157,17 +153,20 @@ public class Functions {
 			}
 			case 4: {
 				System.out.println();
-				try {
-					searchYear();
-				} catch (NumberFormatException e) {
-					log.error("Non farmi arrabbiareeee");
-				}
+				searchYear();
 				System.out.println();
 				break;
 			}
 			case 5: {
 				System.out.println();
 				searchAuthor();
+				System.out.println();
+				break;
+			}
+			case 6: {
+				saveArchive(Readable.getAllReadables());
+				System.out.println();
+				System.out.println("Salvataggio del file avvenuto con successo!");
 				System.out.println();
 				break;
 			}
@@ -234,9 +233,9 @@ public class Functions {
 	}
 	
 	public static Set<Readable> createElements() {
-		Author a_1 = new Author(1, "LizZo");
-		Author a_2 = new Author(2, "Umberto");
-		Author a_3 = new Author(3, "Emanuele");
+		Author a_1 = new Author((Integer) 1, "LizZo");
+		Author a_2 = new Author((Integer) 2, "Umberto");
+		Author a_3 = new Author((Integer) 3, "Emanuele");
 		
 		List<Genre> g_1 = new ArrayList<Genre>();
 		g_1.add(Genre.SCIENCE_FICTION); g_1.add(Genre.SUSPENCE);

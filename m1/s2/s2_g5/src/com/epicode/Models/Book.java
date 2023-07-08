@@ -34,7 +34,7 @@ public class Book extends Readable {
 
 	@Override
 	public String toString() {
-		return "Book [author=" + author.getName() + ", generes=" + generes.toString() + ", ISBN=" + getISBN() + ", Title="
+		return "Book [author=" + author.getName() + ", genres=" + generes.toString() + ", ISBN=" + getISBN() + ", Title="
 				+ getTitle() + ", PublishedDate=" + getPublishedDate() + ", Pages=" + getPages() + "]";
 	}
 }

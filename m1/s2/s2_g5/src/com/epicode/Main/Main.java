@@ -1,27 +1,12 @@
 package com.epicode.Main;
-
 import java.io.IOException;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
-import java.util.Scanner;
-import java.util.Set;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.epicode.Enums.Genre;
-import com.epicode.Enums.Periodicita;
-import com.epicode.Models.*;
-import com.epicode.Models.Readable;
 
 public class Main {
 
 	public static void main(String[] args) {
 		Logger log = LoggerFactory.getLogger(Main.class);
-		Scanner sc = new Scanner(System.in);
 		System.out.println("Benvenuto Umberto!");
 		System.out.println();
 		
@@ -33,7 +18,15 @@ public class Main {
 				System.out.println();
 				System.out.println("** Per favore non barare, inserisci una delle opzioni disponibili **");
 				System.out.println();
+			} catch (IOException ex) {
+				System.out.println();
+				log.error("** Errore imprevisto nel caricare il file ** " + ex.getMessage());
+				System.out.println();
+				System.out.println("Se stai trollando e hai cancellato il file, ti picchio!");
+				System.out.println("Hai la possibilità di salvare il contenuto della lista generata tramite codice più avanti!");
+				System.out.println();
 			} catch (ExitException ex) {
+				System.out.println(ex.getMessage());
 				break;
 			}
 		} while (!Functions.initialized);
@@ -52,20 +45,13 @@ public class Main {
 					System.out.println();
 					System.out.println("Non farmi arrabbiareee. Seleziona una delle opzioni disponibili");
 					System.out.println();
+				} catch (IOException ex) {
+					System.out.println();
+					log.error("** Errore nel salvataggio del File ** " + ex.getMessage());
+					System.out.println();
 				}
 			}
 		}
-		
-		
-		/*
-		Readable.getReadablesByDate(2020).forEach(el -> System.out.println(el));
-
-		//Readable.searchByAuthor(a_1).forEach(el -> System.out.println(el));
-		
-		//Readable.removeElement("ISBN-133");
-		//Readable.removeElement("ISBN-144");
-		//Readable.removeElement("ISBN-155");
-		//Readable.removeElement("ISBN-111"); */
 	}
 }
 
