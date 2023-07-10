@@ -102,6 +102,26 @@ SELECT EXTRACT(YEAR FROM dataFattura) AS anno FROM fatture WHERE tipologia = 'A'
 -- es.7
 SELECT numeroFattura, importo, iva, dataFattura, fornitori.denominazione AS nomeeee FROM fatture LEFT JOIN fornitori ON fatture.numeroFornitore = fornitori.numeroFornitore;
 
+-- es.8
+SELECT SUM(importo) FROM fatture 
+INNER JOIN clienti ON fatture.idCliente = clienti.numeroCliente 
+GROUP BY clienti.regioneResidenza;
+
+-- es.9
+SELECT COUNT(*) FROM fatture 
+INNER JOIN clienti ON fatture.idCliente = clienti.numeroCliente 
+WHERE EXTRACT(YEAR FROM clienti.dataNascita) = 1982 AND importo > 50;
+
+-- es.10
+-- fix per la query
+UPDATE clienti SET regioneResidenza = 'Lombardia' WHERE numeroCliente = 2;
+UPDATE clienti SET regioneResidenza = 'Lombardia' WHERE numeroCliente = 3;
+
+SELECT CONCAT(nome, '-', cognome) AS denominazione FROM clienti
+WHERE regioneResidenza = 'Lombardia';
+
+
+
 
 
 
