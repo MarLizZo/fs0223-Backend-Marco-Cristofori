@@ -6,7 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import com.epicode.Models.Student;
 
@@ -108,8 +110,17 @@ public class DBConnection {
 		}
 	}
 	
-	public void getVoteRange() throws SQLException {
-		
+	public List<Student> getVoteRange(double min, double max) throws SQLException {
+		List<Student> ls = new ArrayList<Student>();
+		String query = "SELECT * FROM school_students WHERE min_vote > " + 
+				min + " AND max_vote < " + max + ";";
+		ResultSet res = state.executeQuery(query);
+		while (res.next()) {
+			ls.add(new Student(res.getInt("id"), res.getString("name"), res.getString("lastname"), 
+				res.getString("gender"), LocalDate.parse(res.getString("birthday")), res.getDouble("avg"), 
+				res.getDouble("min_vote"), res.getDouble("max_vote")));
+		}
+		return ls;
 	}
 }
 

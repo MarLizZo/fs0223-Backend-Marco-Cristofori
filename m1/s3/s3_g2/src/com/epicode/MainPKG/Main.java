@@ -1,9 +1,7 @@
 package com.epicode.MainPKG;
 
 import java.sql.SQLException;
-import java.time.LocalDate;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 import com.epicode.Models.Student;
 import com.epicode.database.DBConnection;
@@ -36,6 +34,13 @@ public class Main {
 			//db.deleteStudent(3);
 			
 			//db.getBest();
+			
+			List<Student> ls = db.getVoteRange(5.9, 8.9);
+			if (ls.size() > 0) {
+				ls.forEach(s -> System.out.println(s));
+			} else {
+				System.out.println("** No student found **");
+			}
 			
 		} catch (SQLException ex) {
 			System.out.println("Errore: " + ex.getMessage());
