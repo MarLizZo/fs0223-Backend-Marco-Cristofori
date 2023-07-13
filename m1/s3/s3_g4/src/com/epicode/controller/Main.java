@@ -6,8 +6,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 import com.epicode.enumerations.Conferma;
+import com.epicode.enumerations.Genere;
 import com.epicode.enumerations.Sesso;
 import com.epicode.enumerations.TipoEvento;
+import com.epicode.model.Concerto;
 import com.epicode.model.Evento;
 import com.epicode.model.Location;
 import com.epicode.model.Partecipazione;
@@ -24,7 +26,7 @@ public class Main {
 		Persona per_2 = new Persona("Umberto", "Emanuele", "umb@ema.com", LocalDate.of(1985, 5, 5), Sesso.MASCHIO);
 		Persona per_3 = new Persona("Geltrude", "Strana", "gel@str.com", LocalDate.of(1992, 7, 9), Sesso.FEMMINA);
 		
-		Evento ev_1 = new Evento("Concerto Vasco", LocalDate.of(2023, 9, 2), "Super converto Live Vasco", TipoEvento.PUBBLICO, 5000, loc_1);
+		/*Evento ev_1 = new Evento("Concerto Vasco", LocalDate.of(2023, 9, 2), "Super converto Live Vasco", TipoEvento.PUBBLICO, 5000, loc_1);
 		Evento ev_2 = new Evento("Concerto Metallica", LocalDate.of(2023, 11, 4), "Live Metallica Roma", TipoEvento.PUBBLICO, 9000, loc_2);
 		Evento ev_3 = new Evento("Meeting AI", LocalDate.of(2023, 7, 12), "Intellettuali e Nerd", TipoEvento.PRIVATO, 45, loc_3);
 		
@@ -32,7 +34,9 @@ public class Main {
 		Partecipazione part_2 = new Partecipazione(per_1, ev_2, Conferma.DA_CONFERMARE);
 		Partecipazione part_3 = new Partecipazione(per_2, ev_2, Conferma.CONFERMATA);
 		Partecipazione part_4 = new Partecipazione(per_2, ev_3, Conferma.CONFERMATA);
-		Partecipazione part_5 = new Partecipazione(per_3, ev_1, Conferma.DA_CONFERMARE);
+		Partecipazione part_5 = new Partecipazione(per_3, ev_1, Conferma.DA_CONFERMARE);*/
+		
+		Concerto c1 = new Concerto("Concerto Vasco", LocalDate.of(2023, 9, 2), "Super converto Live Vasco", TipoEvento.PUBBLICO, 5000, loc_1, Genere.ROCK, false);
 		
 		//System.out.println(loc_1);
 		//System.out.println(per_1);
@@ -40,13 +44,14 @@ public class Main {
 		//System.out.println(part_1);
 		
 		try {
-			/*PersonaDAO.save(per_1);
+			PersonaDAO.save(per_1);
 			PersonaDAO.save(per_2);
 			PersonaDAO.save(per_3);
 			LocationDAO.save(loc_1);
 			LocationDAO.save(loc_2);
 			LocationDAO.save(loc_3);
-			EventDAO.save(ev_1);
+			ConcertoDAO.save(c1);
+			/*EventDAO.save(ev_1);
 			EventDAO.save(ev_2);
 			EventDAO.save(ev_3);
 			PartecipazioneDAO.save(part_1);
@@ -59,14 +64,15 @@ public class Main {
 			//System.out.println(PartecipazioneDAO.getById(1l));
 			//System.out.println(EventDAO.getById(1l));
 			
-		} //catch (SQLException ex) {
-			//System.out.println("ERRORE: " + ex.getMessage());
-		//} 
+		} catch (SQLException ex) {
+			System.out.println("ERRORE: " + ex.getMessage());
+		} 
 		finally {
-			/*PersonaDAO.em.close();
+			/*EventDAO.em.close();
 			LocationDAO.em.close();
-			EventDAO.em.close();
-			PartecipazioneDAO.em.close();*/
+			PartecipazioneDAO.em.close();
+			PersonaDAO.em.close();*/
+			ConcertoDAO.em.close();
 		}
 		
 	}
