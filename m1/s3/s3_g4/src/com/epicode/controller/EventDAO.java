@@ -10,7 +10,7 @@ import com.epicode.model.Evento;
 
 public class EventDAO {
 	
-	static EntityManagerFactory  emf = Persistence.createEntityManagerFactory("test_jpa");
+	static EntityManagerFactory  emf = Persistence.createEntityManagerFactory("test_jpa_2");
 	public static EntityManager em = emf.createEntityManager();
 	
 	public static void save(Evento e) throws SQLException {

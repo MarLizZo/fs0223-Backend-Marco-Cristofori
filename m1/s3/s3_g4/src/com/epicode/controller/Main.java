@@ -40,11 +40,33 @@ public class Main {
 		//System.out.println(part_1);
 		
 		try {
-			PersonaDAO.save(per_1);
-		} catch (SQLException ex) {
-			System.out.println("ERRORE: " + ex.getMessage());
-		} finally {
-			PersonaDAO.em.close();
+			/*PersonaDAO.save(per_1);
+			PersonaDAO.save(per_2);
+			PersonaDAO.save(per_3);
+			LocationDAO.save(loc_1);
+			LocationDAO.save(loc_2);
+			LocationDAO.save(loc_3);
+			EventDAO.save(ev_1);
+			EventDAO.save(ev_2);
+			EventDAO.save(ev_3);
+			PartecipazioneDAO.save(part_1);
+			PartecipazioneDAO.save(part_2);
+			PartecipazioneDAO.save(part_3);
+			PartecipazioneDAO.save(part_4);
+			PartecipazioneDAO.save(part_5);*/
+			//System.out.println(PersonaDAO.getById(1l));
+			//System.out.println(LocationDAO.getById(1l));
+			//System.out.println(PartecipazioneDAO.getById(1l));
+			//System.out.println(EventDAO.getById(1l));
+			
+		} //catch (SQLException ex) {
+			//System.out.println("ERRORE: " + ex.getMessage());
+		//} 
+		finally {
+			/*PersonaDAO.em.close();
+			LocationDAO.em.close();
+			EventDAO.em.close();
+			PartecipazioneDAO.em.close();*/
 		}
 		
 	}

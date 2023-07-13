@@ -3,6 +3,7 @@ package com.epicode.model;
 import java.time.LocalDate;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -39,7 +40,7 @@ public class Persona {
 	@Column(name = "sex", nullable = false)
 	private Sesso sesso;
 	
-	@OneToMany(mappedBy = "persona")
+	@OneToMany(mappedBy = "persona", cascade = CascadeType.REMOVE)
 	private Set<Partecipazione> listaPartecipazioni;
 
 	public Persona() {}
@@ -120,7 +121,7 @@ public class Persona {
 	@Override
 	public String toString() {
 		return "Persona [id=" + id + ", nome=" + nome + ", cognome=" + cognome + ", email=" + email + ", dataNascita="
-				+ dataNascita + ", sesso=" + sesso + ", listaPartecipazioni=" + listaPartecipazioni + "]";
+				+ dataNascita + ", sesso=" + sesso + "]";
 	}
 }
 
