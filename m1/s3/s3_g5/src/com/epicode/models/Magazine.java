@@ -9,7 +9,7 @@ import javax.persistence.NamedQuery;
 import com.epicode.enumerations.Periodicita;
 
 @Entity
-@NamedQuery(name = "magazine.findAll", query = "SELECT m FROM Magazine m")
+@NamedQuery(name = "Magazine.getAll", query = "SELECT m FROM Magazine m")
 public class Magazine extends ElementoBiblioteca {
 	
 	@Column(nullable = false)

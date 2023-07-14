@@ -7,9 +7,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.NamedQuery;
 
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@NamedQuery(name = "ElementoBiblioteca.getAll", query = "SELECT el FROM ElementoBiblioteca el")
 public class ElementoBiblioteca {
 	
 	@Id
@@ -28,7 +30,7 @@ public class ElementoBiblioteca {
 	public ElementoBiblioteca(Long id, String iSBN, String title, LocalDate publishedDate, Integer pages) {
 		super();
 		this.id = id;
-		ISBN = iSBN;
+		this.ISBN = iSBN;
 		this.title = title;
 		this.publishedDate = publishedDate;
 		this.pages = pages;
@@ -36,7 +38,7 @@ public class ElementoBiblioteca {
 
 	public ElementoBiblioteca(String iSBN, String title, LocalDate publishedDate, Integer pages) {
 		super();
-		ISBN = iSBN;
+		this.ISBN = iSBN;
 		this.title = title;
 		this.publishedDate = publishedDate;
 		this.pages = pages;
@@ -47,7 +49,7 @@ public class ElementoBiblioteca {
 	}
 
 	public void setISBN(String iSBN) {
-		ISBN = iSBN;
+		this.ISBN = iSBN;
 	}
 
 	public String getTitle() {

@@ -12,7 +12,7 @@ import javax.persistence.NamedQuery;
 import com.epicode.enumerations.Genre;
 
 @Entity
-@NamedQuery(name = "book.findAll", query = "SELECT b FROM Book b")
+@NamedQuery(name = "Book.getAll", query = "SELECT b FROM Book b")
 public class Book extends ElementoBiblioteca {
 	
 	@ManyToOne
@@ -31,9 +31,32 @@ public class Book extends ElementoBiblioteca {
 		this.genre = genre;
 	}
 
-	public Book(String iSBN, String title, LocalDate publishedDate, Integer pages, Genre genre) {
+	public Book(String iSBN, String title, Author author, LocalDate publishedDate, Integer pages, Genre genre) {
 		super(iSBN, title, publishedDate, pages);
+		this.autore = author;
 		this.genre = genre;
 	}
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
