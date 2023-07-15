@@ -37,6 +37,27 @@ public class Book extends ElementoBiblioteca {
 		this.genre = genre;
 	}
 
+	public Author getAutore() {
+		return autore;
+	}
+
+	public void setAutore(Author autore) {
+		this.autore = autore;
+	}
+
+	public Genre getGenre() {
+		return genre;
+	}
+
+	public void setGenre(Genre genre) {
+		this.genre = genre;
+	}
+
+	@Override
+	public String toString() {
+		return "Book [autore=" + autore + ", genre=" + genre + ", toString()=" + super.toString() + "]";
+	}
+
 }
 
 
