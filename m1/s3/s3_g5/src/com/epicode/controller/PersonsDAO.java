@@ -93,6 +93,28 @@ public class PersonsDAO {
 		}
 		return a;
 	}
+	
+	public static Utente getUser(int id) {
+		EntityManager em = JPAUtil.getEMF().createEntityManager();
+		Utente u = new Utente();
+		
+		try {
+			em.getTransaction().begin();
+			Query q = em.createQuery("SELECT u FROM Utente u WHERE u.id = :id");
+			q.setParameter("id", Long.valueOf(id));
+			u = (Utente) q.getSingleResult();
+		} catch (IllegalArgumentException ex) {
+			System.out.println(">> ERRORE: " + ex.getMessage());
+		} catch (NoResultException ex) {
+			System.out.println(">> ERRORE - Nessun risultato >> " + ex.getMessage());
+		} catch (NonUniqueResultException ex) {
+			System.out.println(">> ERRORE - Piu di un risultato >> " + ex.getMessage());
+		}
+		finally {
+			em.close();
+		}
+		return u;
+	}
 }
 
 

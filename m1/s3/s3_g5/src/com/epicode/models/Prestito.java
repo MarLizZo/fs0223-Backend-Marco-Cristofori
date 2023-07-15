@@ -9,19 +9,21 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 
 @Entity
+@NamedQuery(name = "Prestito.getAll", query = "SELECT p FROM Prestito p")
 public class Prestito {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	private Utente user;
 	
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.EAGER)
 	private ElementoBiblioteca elementoPrestato;
 	
 	@Column(nullable = false)
@@ -41,6 +43,15 @@ public class Prestito {
 		this.elementoPrestato = elementoPrestato;
 		this.dataInizioPrestito = dataInizioPrestito;
 		this.dataRestituzionePrevista = dataRestituzionePrevista;
+		this.restituzioneEffettiva = restituzioneEffettiva;
+	}
+
+	public Prestito(Utente user, ElementoBiblioteca elementoPrestato, LocalDate dataInizioPrestito, LocalDate restituzioneEffettiva) {
+		super();
+		this.user = user;
+		this.elementoPrestato = elementoPrestato;
+		this.dataInizioPrestito = dataInizioPrestito;
+		this.dataRestituzionePrevista = dataInizioPrestito.plusDays(30);
 		this.restituzioneEffettiva = restituzioneEffettiva;
 	}
 

@@ -88,6 +88,28 @@ public class ElementoDAO {
 		return ls;
 	}
 	
+	public static ElementoBiblioteca getElementById(int id) {
+		EntityManager em = JPAUtil.getEMF().createEntityManager();
+		ElementoBiblioteca element = new ElementoBiblioteca();
+		
+		try {
+			em.getTransaction().begin();
+			Query q = em.createQuery("SELECT e FROM ElementoBiblioteca e WHERE e.id = :id");
+			q.setParameter("id", Long.valueOf(id));
+			element = (ElementoBiblioteca) q.getSingleResult();
+		} catch (IllegalArgumentException ex) {
+			System.out.println(">> ERRORE: " + ex.getMessage());
+		} catch (NoResultException ex) {
+			System.out.println(">> ERRORE - Nessun risultato >> " + ex.getMessage());
+		} catch (NonUniqueResultException ex) {
+			System.out.println(">> ERRORE - Piu di un risultato >> " + ex.getMessage());
+		}
+		finally {
+			em.close();
+		}
+		return element;
+	}
+	
 	public static ElementoBiblioteca getElementByISBN(String isbn) {
 		EntityManager em = JPAUtil.getEMF().createEntityManager();
 		ElementoBiblioteca element = new ElementoBiblioteca();
