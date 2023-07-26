@@ -37,6 +37,12 @@ public class ConfigurationClass {
 		return new Bevanda(name, calories, prezzo);
 	}
 	
+	@Bean("customDrink")
+	@Scope("prototype") 
+	public Bevanda instanceCustomDrink() {
+		return new Bevanda();
+	}
+	
 	@Bean
 	@Scope("prototype") 
 	public Ordine instanceOrder(long numeroOrdine, StatoOrdine statoOrdine, List<IProdotto> listaProdotti, LocalDate dataAcquisizione,

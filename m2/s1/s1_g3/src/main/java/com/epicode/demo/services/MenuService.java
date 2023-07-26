@@ -4,6 +4,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.ObjectProvider;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.PropertySource;
@@ -25,6 +28,7 @@ import com.epicode.model.Topping;
 public class MenuService {
 	
 	@Value("${costo.tavolo.coperto}") private String costoCoperto;
+	@Autowired @Qualifier("customDrink") private ObjectProvider<Bevanda> customBevanda;
 	
 	public void createPizza(String name, List<Topping> lsT, boolean isFamSize) {
 		AnnotationConfigApplicationContext appContext = new AnnotationConfigApplicationContext(ConfigurationClass.class);
@@ -35,13 +39,9 @@ public class MenuService {
 		appContext.close();
 	}
 	
-	public void createDrink(String name, double cal, double price) {
-		AnnotationConfigApplicationContext appContext = new AnnotationConfigApplicationContext(ConfigurationClass.class);
-		
-		Bevanda b1 = (Bevanda) appContext.getBean("instanceDrink", name, cal, price);
-		System.out.println(b1.getName() + "  **  Prezzo : " + b1.getPrezzo() + "  **  Calorie: " + b1.getCalories());
-		
-		appContext.close();
+	public Bevanda createDrink(String name, double cal, double price) {
+		Bevanda b = customBevanda.getObject();
+		return b.builder().name(name).calories(cal).prezzo(price).build();
 	}
 	
 	public void createTopping(Toppings topp) {
