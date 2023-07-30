@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Service;
 
+import com.GestionePrenotazioni.Colors;
 import com.GestionePrenotazioni.configs.FacilityConfig;
 import com.GestionePrenotazioni.models.Facility;
 import com.GestionePrenotazioni.repositories.FacilityRepo;
@@ -23,16 +24,21 @@ public class FacilityService {
 		return empty_facility.getObject();
 	}
 	
-	public Facility createDefaultFacility(String _address, String _city) {
+	public Facility createDefaultFacility(String _name, String _address, String _city) {
 		AnnotationConfigApplicationContext appContext = new AnnotationConfigApplicationContext(FacilityConfig.class);
-		Facility f = (Facility) appContext.getBean("facility_default", _address, _city);
+		Facility f = (Facility) appContext.getBean("facility_default", _name, _address, _city);
 		appContext.close();
 		return f;
 	}
 	
 	public void saveFacility(Facility f) {
-		repo.save(f);
-		System.out.println("** Facility in " + f.getCity() + " saved correctly **");
+		if (repo.findByNameAndCity(f.getName(), f.getCity()) == null) {
+			repo.save(f);
+			System.out.println("** Facility in " + f.getCity() + " saved correctly **");
+		} else {
+			System.out.println(Colors.ANSI_RED_DANGER + "** Facility named " + f.getName()
+				+ " in city " + f.getCity() + " already exists **" + Colors.RESET);
+		}
 	}
 	
 	public List<Facility> getAll() {

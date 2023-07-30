@@ -20,7 +20,7 @@ public class WorkStationRunner implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		System.out.println(Colors.ANSI_CYAN + "** .. WorkStation Runner running .. **" + Colors.RESET);
 		System.out.println();
-		/*svc.saveWS(svc.createCompleteWorkStation("WS-1-Single-123", "Single WS for Focus", WSType.PRIVATE, f_svc.getById(1l)));
+		svc.saveWS(svc.createCompleteWorkStation("WS-1-Single-123", "Single WS for Focus", WSType.PRIVATE, f_svc.getById(1l)));
 		svc.saveWS(svc.createCompleteWorkStation("WS-1-Single-234", "Single WS for Focus", WSType.PRIVATE, f_svc.getById(1l)));
 		svc.saveWS(svc.createCompleteWorkStation("WS-1-Single-345", "Single WS for Focus", WSType.PRIVATE, f_svc.getById(1l)));
 		svc.saveWS(svc.createCompleteWorkStation("WS-1-Open-123", "Open Space for Team", WSType.OPENSPACE, f_svc.getById(1l)));
@@ -54,6 +54,18 @@ public class WorkStationRunner implements CommandLineRunner {
 		svc.saveWS(svc.createCompleteWorkStation("WS-5-Open-234", "Open Space for Team", WSType.OPENSPACE, f_svc.getById(5l)));
 		svc.saveWS(svc.createCompleteWorkStation("WS-5-Open-345", "Open Space for Team", WSType.OPENSPACE, f_svc.getById(5l)));
 		svc.saveWS(svc.createCompleteWorkStation("WS-5-Open-456", "Open Space for Team", WSType.OPENSPACE, f_svc.getById(5l)));
-		svc.saveWS(svc.createCompleteWorkStation("WS-5-Room-123", "Board Room for Council", WSType.BOARDROOM, f_svc.getById(5l)));*/
+		svc.saveWS(svc.createCompleteWorkStation("WS-5-Room-123", "Board Room for Council", WSType.BOARDROOM, f_svc.getById(5l)));
+		
+		svc.saveWS(svc.createCompleteWorkStation("WS-6-Single-123", "Single WS for Focus", WSType.PRIVATE, f_svc.getById(6l)));
+		svc.saveWS(svc.createCompleteWorkStation("WS-6-Open-123", "Open Space for Team", WSType.OPENSPACE, f_svc.getById(6l)));
+		
+		System.out.println();
+		System.out.println(Colors.ANSI_VIOLET_LIGHT + ">> List all Work Stations with Type 'OPENSPACE' in City 'Roma' <<" + Colors.RESET);
+		System.out.println();
+		
+		// list all WS with specific Type and City
+		svc.getByTypeAndCity(WSType.OPENSPACE, "Roma").forEach(el -> System.out.println(el));
+		
+		System.out.println();
 	}
 }

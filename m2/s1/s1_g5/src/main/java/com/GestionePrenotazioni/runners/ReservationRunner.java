@@ -30,11 +30,58 @@ public class ReservationRunner implements CommandLineRunner {
 		System.out.println();
 		
 		Set<User> users = new HashSet<User>();
-		//svc.saveRes(svc.createResDefault(users, LocalDate.now().plusDays(1), w_svc.getById(1l)));
-		users.clear();
-		users.addAll(List.of(u_svc.getById(5l), u_svc.getById(4l)));
-		svc.saveRes(svc.createResDefault(users, LocalDate.now().plusDays(1), w_svc.getById(5l)));
 		
+		users.add(u_svc.getById(1l));
+		svc.saveRes(svc.createResDefault(users, LocalDate.now().plusDays(1), w_svc.getById(1l)));
+		users.clear();
+		
+		users.addAll(List.of(u_svc.getById(4l), u_svc.getById(5l)));
+		svc.saveRes(svc.createResDefault(users, LocalDate.now().plusDays(1), w_svc.getById(4l)));
+		users.clear();
+		
+		users.addAll(List.of(u_svc.getById(1l), u_svc.getById(2l), u_svc.getById(3l)));
+		svc.saveRes(svc.createResDefault(users, LocalDate.now().plusDays(2), w_svc.getById(5l)));
+		users.clear();
+		
+		users.addAll(List.of(u_svc.getById(1l), u_svc.getById(2l), u_svc.getById(4l), u_svc.getById(5l), u_svc.getById(6l)));
+		svc.saveRes(svc.createResDefault(users, LocalDate.of(2023, 8, 20), w_svc.getById(6l)));
+		users.clear();
+		
+		users.addAll(List.of(u_svc.getById(2l)));
+		svc.saveRes(svc.createResDefault(users, LocalDate.of(2023, 8, 10), w_svc.getById(2l)));
+		
+		users.add(u_svc.getById(5l));
+		svc.saveRes(svc.createResDefault(users, LocalDate.now().plusMonths(1), w_svc.getById(3l)));
+		users.clear();
+		
+		System.out.println();
+		System.out.println(Colors.ANSI_VIOLET_LIGHT + ">> Test same date <<" + Colors.RESET);
+		// test same date
+		users.addAll(List.of(u_svc.getById(2l)));
+		svc.saveRes(svc.createResDefault(users, LocalDate.of(2023, 8, 10), w_svc.getById(10l)));
+		users.clear();
+		
+		System.out.println();
+		System.out.println(Colors.ANSI_VIOLET_LIGHT + ">> Test maxSeats reached <<" + Colors.RESET);
+		// test maxSeats reached
+		users.add(u_svc.getById(4l));
+		svc.saveRes(svc.createResDefault(users, LocalDate.now().plusDays(2), w_svc.getById(5l)));
+		users.clear();
+		
+		System.out.println();
+		System.out.println(Colors.ANSI_VIOLET_LIGHT + ">> Test update existing Reservation by adding a new User -- Fails if already processed <<"
+				+ Colors.RESET);
+		// test update existing reservation for a Board Room with available seats
+		users.add(u_svc.getById(7l));
+		svc.saveRes(svc.createResDefault(users, LocalDate.of(2023, 8, 20), w_svc.getById(6l)));
+		users.clear();
+		
+		System.out.println();
+		System.out.println(Colors.ANSI_VIOLET_LIGHT + ">> Test with a Date before Now <<" + Colors.RESET);
+		// Test past Date
+		users.add(u_svc.getById(1l));
+		svc.saveRes(svc.createResDefault(users, LocalDate.of(2023, 7, 20), w_svc.getById(6l)));
+		users.clear();
 		System.out.println();
 	}
 }

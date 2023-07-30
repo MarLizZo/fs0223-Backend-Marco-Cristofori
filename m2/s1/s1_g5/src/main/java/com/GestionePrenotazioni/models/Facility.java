@@ -30,6 +30,9 @@ public class Facility {
 	private Long id;
 	
 	@Column(nullable = false)
+	private String name;
+	
+	@Column(nullable = false)
 	private String address;
 	
 	@Column(nullable = false)
@@ -37,14 +40,16 @@ public class Facility {
 	
 	@OneToMany(mappedBy = "facility", fetch = FetchType.LAZY)
 	private List<WorkStation> workStations;
+
 	
-	public Facility(String _address, String _city) {
-		this.address = _address;
-		this.city = _city;
+	public Facility(String name, String address, String city) {
+		this.name = name;
+		this.address = address;
+		this.city = city;
 	}
 
 	@Override
 	public String toString() {
-		return "Facility [id=" + id + ", address=" + address + ", city=" + city + "]";
+		return "Facility [id=" + id + ", name=" + name + ", address=" + address + ", city=" + city + "]";
 	}
 }

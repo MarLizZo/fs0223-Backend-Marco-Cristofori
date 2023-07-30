@@ -48,17 +48,29 @@ public class ReservationService {
 		return repo.findByDate(date);
 	}
 	
+	// Il Super Saiyan dei Metodi :)
+	// ho usato Java per fare tutti i check, da delle Query sarebbe stato impossibile (per me)
 	public void saveRes(Reservation res) {
+		
+		if (res.getDate().isBefore(LocalDate.now())) {
+			System.out.println(Colors.ANSI_RED_DANGER + "** Time machine not yet invented.. I'm working on it. **" + Colors.RESET);
+			return;
+		}
+		
 		List<Reservation> r = getByDate(res.getDate());
 		
 		// if no reservations for date are found, create new reservation
 		if (r.size() == 0) {
 			repo.save(res);
-			System.out.println("** New Reservation for Date " + res.getDate().toString() + " saved correctly **");
+			System.out.println("** New Reservation for " + res.getWorkStation().getCode() + " on Date "
+					+ res.getDate().toString() + " saved correctly **");
 		} else {
 			
 			// cycle users passed as parameter inside the res instance to check all the cases
 			for (User user : res.getUsers()) {
+				
+				// refresh list
+				r = getByDate(res.getDate());
 				
 				// if users already booked a Work Station for date
 				if (r.stream().anyMatch(el -> el.getUsers().stream().anyMatch(us -> us.getUsername().equals(user.getUsername())))) {
@@ -86,9 +98,10 @@ public class ReservationService {
 						}
 					} else {
 						
-						// save new Reservation with the same Date but different Work Station
+						// save new Reservation with the same Date but for different Work Station
 						repo.save(res);
-						System.out.println("** Reservation for Date " + res.getDate().toString() + " saved correctly **");
+						System.out.println("** New Reservation for " + res.getWorkStation().getCode() + " on Date "
+								+ res.getDate().toString() + " saved correctly **");
 					}
 				}
 			}

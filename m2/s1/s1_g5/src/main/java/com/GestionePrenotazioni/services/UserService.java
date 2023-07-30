@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Service;
 
+import com.GestionePrenotazioni.Colors;
 import com.GestionePrenotazioni.configs.UserConfig;
 import com.GestionePrenotazioni.models.Reservation;
 import com.GestionePrenotazioni.models.User;
@@ -39,8 +40,13 @@ public class UserService {
 	}
 	
 	public void saveUser(User u) {
-		repo.save(u);
-		System.out.println("** User " + u.getUsername() + " saved correctly **");
+		if (getByUsername(u.getUsername()) == null && repo.findByEmail(u.getEmail()) == null) {
+			repo.save(u);
+			System.out.println("** User " + u.getUsername() + " saved correctly **");
+		} else {
+			System.out.println(Colors.ANSI_RED_DANGER + "** Error creating new User with username " + u.getUsername() 
+				+ " **" + Colors.RESET);
+		}
 	}
 	
 	public List<User> getAll() {
@@ -50,6 +56,10 @@ public class UserService {
 	public User getById(Long id) {
 		Optional<User> opt = repo.findById(id);
 		return opt.isPresent() ? opt.get() : null;
+	}
+	
+	public User getByUsername(String username) {
+		return repo.findByUsername(username);
 	}
 }
 

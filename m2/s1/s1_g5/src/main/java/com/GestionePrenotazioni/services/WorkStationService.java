@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Service;
 
+import com.GestionePrenotazioni.Colors;
 import com.GestionePrenotazioni.configs.WorkStationConfig;
 import com.GestionePrenotazioni.enums.WSType;
 import com.GestionePrenotazioni.models.Facility;
@@ -32,8 +33,12 @@ public class WorkStationService {
 	}
 	
 	public void saveWS(WorkStation w) {
-		repo.save(w);
-		System.out.println("** WorkStation " + w.getCode() + " saved correctly **");
+		if (repo.findByCode(w.getCode()) == null) {
+			repo.save(w);
+			System.out.println("** WorkStation " + w.getCode() + " saved correctly **");
+		} else {
+			System.out.println(Colors.ANSI_RED_DANGER + "** Work Station with code " + w.getCode() + " already exists **" + Colors.RESET);
+		}
 	}
 	
 	public WorkStation getById(Long id) {
@@ -43,6 +48,10 @@ public class WorkStationService {
 	
 	public List<WorkStation> getAll() {
 		return (List<WorkStation>) repo.findAll();
+	}
+	
+	public List<WorkStation> getByTypeAndCity(WSType type, String city) {
+		return repo.findByTypeAndCity(type, city);
 	}
 }
 

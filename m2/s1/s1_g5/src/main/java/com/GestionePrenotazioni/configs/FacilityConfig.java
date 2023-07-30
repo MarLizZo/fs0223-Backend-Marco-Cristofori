@@ -17,8 +17,8 @@ public class FacilityConfig {
 	
 	@Bean
 	@Scope("prototype")
-	public Facility facility_default(String _address, String _city) {
+	public Facility facility_default(String _name, String _address, String _city) {
 		Facility f = new Facility();
-		return f.builder().address(_address).city(_city).build();
+		return f.builder().name(_name).address(_address).city(_city).build();
 	}
 }
