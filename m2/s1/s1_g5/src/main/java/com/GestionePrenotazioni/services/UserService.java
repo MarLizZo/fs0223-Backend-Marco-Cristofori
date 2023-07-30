@@ -1,0 +1,81 @@
+package com.GestionePrenotazioni.services;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.ObjectProvider;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.stereotype.Service;
+
+import com.GestionePrenotazioni.configs.UserConfig;
+import com.GestionePrenotazioni.models.Reservation;
+import com.GestionePrenotazioni.models.User;
+import com.GestionePrenotazioni.repositories.UserRepo;
+
+@Service
+public class UserService {
+	
+	@Autowired UserRepo repo;
+	@Autowired @Qualifier("empty_user") private ObjectProvider<User> empty_user;
+	
+	public User createEmptyUser() {
+		return empty_user.getObject();
+	}
+	
+	public User createUser(String _username, String _name, String _lastname, String _email) {
+		AnnotationConfigApplicationContext appContext = new AnnotationConfigApplicationContext(UserConfig.class);
+		User u = (User) appContext.getBean("user_no_res", _username, _name, _lastname, _email);
+		appContext.close();
+		return u;
+	}
+	
+	public User createCompleteUser(String _username, String _name, String _lastname, String _email, List<Reservation> reservations) {
+		AnnotationConfigApplicationContext appContext = new AnnotationConfigApplicationContext(UserConfig.class);
+		User u = (User) appContext.getBean("user_with_res", _username, _name, _lastname, _email, reservations);
+		appContext.close();
+		return u;
+	}
+	
+	public void saveUser(User u) {
+		repo.save(u);
+		System.out.println("** User " + u.getUsername() + " saved correctly **");
+	}
+	
+	public List<User> getAll() {
+		return (List<User>) repo.findAll();
+	}
+	
+	public User getById(Long id) {
+		Optional<User> opt = repo.findById(id);
+		return opt.isPresent() ? opt.get() : null;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
