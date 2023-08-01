@@ -1,0 +1,47 @@
+@Controller - per poter usare Tymeleaf
+@RestController - invece che @Controller - ritorna sempre Stringhe (JSON), impossibile usare Tymeleaf
+@RequestMapping("/api")
+public class MyController {
+	
+	@GetMapping - @PostMapping - @PutMapping - @DeleteMapping
+	public ResponseEntity<String> getTest() {
+		HttpsHeaders headers = new HttpsHeaders(); - opzionale aggiungere gli headers
+		header.add("Name", "Mar.LizZo");
+		
+		ResponseEntity<String> resp;
+		if (bool == true) {
+			resp = new ResponseEntity<String>("Contenuto qui", headers, HttpStatus.OK);
+		} else {
+			resp = new ResponseEntity<String>("Error Not found", HttpStatus.NOT_FOUND);
+		}
+		return resp;
+	}
+	
+	@PostMapping("/test")
+	public String postTest(@RequestBody String obj) { // RequestBody per ottenere l'object inviato da client
+		syso(obj) - stampa l'oggetto sotto forma di stringa (JSON.stringify da client)
+		
+		per trasformarlo in oggetto @RequestBody User obj nel parametro
+		accedere poi alle proprietà normalmente - obj.name
+	}
+}
+
+ResponseEntity - oggetto che contiene all'interno Header (opzionale), Body, ResponseStatus
+
+@GetMapping
+public ResponseEntity<List<User>> getAll() {
+	List<User> ls = svc.getAll();
+	ResponseEntity<List<User>> resp = new ResponseEntity<List<User>>(ls, HttpStatus.OK);
+	return resp;
+}
+
+@GetMapping("/{id}")
+public ResponseEntity<User> getById(@PathVariable Long id) {
+	ResponseEntity<User> resp = new ResponseEntity<User>(svc.getById(id), HttpStatus.OK);
+	return resp;
+}
+
+mettere dentro un try - catch
+nel catch return new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
+per return multipli del ResponseEntity
+ResponseEntity<?>

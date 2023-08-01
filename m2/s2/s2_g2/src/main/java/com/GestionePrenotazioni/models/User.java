@@ -2,6 +2,8 @@ package com.GestionePrenotazioni.models;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -42,6 +44,7 @@ public class User {
 	private String email;
 	
 	@ManyToMany(mappedBy = "users", fetch = FetchType.EAGER)
+	@JsonIgnore
 	private List<Reservation> reservations;
 	
 	public User(String _username, String _name, String _lastname, String _email) {

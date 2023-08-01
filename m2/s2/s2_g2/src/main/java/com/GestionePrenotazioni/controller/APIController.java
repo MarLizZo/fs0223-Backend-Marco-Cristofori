@@ -39,7 +39,7 @@ public class APIController {
 	@GetMapping("/users")
 	public ResponseEntity<List<User>> getAllUsers() {
 		List<User> ls = user_svc.getAll();
-		ls.forEach(el -> el.setReservations(null));
+		//ls.forEach(el -> el.setReservations(null));
 		return new ResponseEntity<List<User>>(ls, HttpStatus.OK);
 	}
 	
@@ -47,7 +47,7 @@ public class APIController {
 	public ResponseEntity<?> getUserById(@PathVariable Long id) {
 		try {
 			User u = user_svc.getById(id);
-			u.setReservations(null);
+			//u.setReservations(null);
 			return new ResponseEntity<User>(u, HttpStatus.OK);
 		} catch (Exception ex) {
 			return new ResponseEntity<String>(ex.getMessage(), HttpStatus.BAD_REQUEST);
