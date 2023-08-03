@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Spring Sec Test</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+</head>
+
+<body class="bg-dark text-secondary">
+    <header class="py-2 d-flex justify-content-center border-bottom border-1 border-primary">
+        <a href="index.html" class="link-info text-decoration-none me-4">Homepage</a>
+        <a href="#" class="link-info text-decoration-none">Login</a>
+    </header>
+    <div class="container py-4">
+        <h1>Homepage</h1>
+        <div class="inp-container mt-3">
+            <label for="username">Username</label>
+            <input id="username" type="text" class="bg-dark form-control form-control-sm w-50 text-light">
+            <label for="pass" class="mt-1">Password</label>
+            <input id="pass" type="password" class="bg-dark form-control form-control-sm w-50 text-light">
+            <button id="log-btn" class="btn btn-outline-info px-5 mt-4">Login</button>
+
+            <h5 class="mt-4">Access Token:</h5>
+            <p id="infos">Not logged in</p>
+        </div>
+    </div>
+    <script src="main.js"></script>
+</body>
+
+</html>
