@@ -9,13 +9,11 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 @Entity
 @Table(name = "smartphones")
 @Getter
 @Setter
-@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 public class Smartphone extends Device {
@@ -34,5 +32,11 @@ public class Smartphone extends Device {
 		this.storage = _storage;
 		this.camera = _camera;
 		this.os = _os;
+	}
+
+	@Override
+	public String toString() {
+		return "Smartphone [inch=" + inch + ", storage=" + storage + ", camera=" + camera + ", os=" + os
+				+ ", getName()=" + getName() + ", getType()=" + getType() + ", getState()=" + getState() + "]";
 	}
 }

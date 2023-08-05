@@ -2,6 +2,7 @@ package com.GestioneDevices.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,8 +14,7 @@ import com.GestioneDevices.payload.LoginDto;
 import com.GestioneDevices.payload.RegisterDto;
 import com.GestioneDevices.service.AuthService;
 
-
-
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
@@ -44,14 +44,4 @@ public class AuthController {
         String response = authService.register(registerDto);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
-    
-    // JSON inviato dal Client
-    /*{
-        "name": "Giuseppe",
-        "lastname": "Verdi",
-        "username": "giuseppevardi",
-        "email": "g.verdi@example.com",
-        "password": "qwerty",
-        "roles": ["MODERATOR", "ADMIN"]
-    }*/
 }

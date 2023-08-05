@@ -10,13 +10,11 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 @Entity
 @Table(name = "laptops")
 @Getter
 @Setter
-@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -34,5 +32,10 @@ public class Laptop extends Device {
 		this.ram = _ram;
 		this.os = _os;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "Laptop [storage=" + storage + ", ram=" + ram + ", os=" + os + ", getName()=" + getName()
+				+ ", getType()=" + getType() + ", getState()=" + getState() + "]";
+	}
 }

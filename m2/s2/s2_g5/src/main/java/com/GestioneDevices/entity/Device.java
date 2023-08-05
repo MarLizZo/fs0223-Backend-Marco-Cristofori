@@ -1,7 +1,11 @@
 package com.GestioneDevices.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.GestioneDevices.enumerators.EDeviceState;
 import com.GestioneDevices.enumerators.EDeviceType;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -12,6 +16,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -43,6 +48,10 @@ public class Device {
 	@Column(nullable = false)
 	@Enumerated(EnumType.STRING)
 	private EDeviceState state;
+	
+	@OneToMany(mappedBy = "device")
+	@JsonIgnore
+	private List<User_Device> user_devices = new ArrayList<>();
 	
 	public Device(String name, EDeviceType type, EDeviceState state) {
 		this.name = name;

@@ -84,7 +84,6 @@ public class AuthServiceImpl implements AuthService {
         Role userRole = roleRepository.findByRoleName(ERole.ROLE_USER).get();
         roles.add(userRole);
         List<Device> devices = new ArrayList<>();
-        user.setDevices(devices);
         
         user.setRoles(roles);
         userRepository.save(user);
