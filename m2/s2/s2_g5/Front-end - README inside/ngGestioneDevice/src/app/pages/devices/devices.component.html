@@ -1,0 +1,5 @@
+<div class="row mt-4 g-3 w-100">
+    <div *ngFor="let d of devicesArr" class="col-6">
+        <app-devicecard [device]="d" [isAdmin]="iAmAdmin" (onDelete)="deleteDevice($event)"></app-devicecard>
+    </div>
+</div>

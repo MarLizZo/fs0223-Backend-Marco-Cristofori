@@ -1,0 +1,5 @@
+<div class="row mt-4 g-3 w-100">
+    <div *ngFor="let u of usersArr" class="col-6">
+        <app-usercard [user]="u" [isAdmin]="iAmAdmin" (onDelete)="deleteUser($event)"></app-usercard>
+    </div>
+</div>

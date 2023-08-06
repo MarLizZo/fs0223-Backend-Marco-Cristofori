@@ -1,0 +1,12 @@
+<div class="d-flex flex-column align-items-center border-bottom border-black pb-3">
+    <p class="mb-1">Type: {{ device.type }}</p>
+    <p class="mb-1">Name: {{ device.name }}</p>
+    <p class="mb-1">State: {{ device.state }}</p>
+    <p class="mb-1" *ngIf="device.type == 'LAPTOP' || device.type == 'SMARTPHONE'">Storage: {{ device.storage }}</p>
+    <p class="mb-1" *ngIf="device.type == 'LAPTOP' || device.type == 'SMARTPHONE'">OS: {{ device.os }}</p>
+    <p class="mb-1" *ngIf="device.type == 'LAPTOP'">RAM: {{ device.ram }}</p>
+    <p class="mb-1" *ngIf="device.type == 'SMARTPHONE'">Camera: {{ device.camera }}</p>
+    <p class="mb-1" *ngIf="device.type == 'SMARTPHONE' || device.type == 'TABLET'">Inch: {{ device.inch }}</p>
+    <p class="mb-1" *ngIf="device.type == 'TABLET'">Pen: {{ device.with_pen }}</p>
+    <button *ngIf="isAdmin" class="mt-3 btn btn-sm btn-outline-danger px-4" (click)="deleteDevice()">Elimina</button>
+</div>

@@ -11,6 +11,7 @@ import { IUser } from 'src/app/interfaces/iuser';
 })
 export class UsercardComponent {
   @Input() user!: IUser;
+  @Input() isAdmin!: boolean;
 
   @Output() onDelete = new EventEmitter();
 

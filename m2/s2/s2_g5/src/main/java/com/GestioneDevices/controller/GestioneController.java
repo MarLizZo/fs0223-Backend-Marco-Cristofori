@@ -74,18 +74,18 @@ public class GestioneController {
 	
 	@DeleteMapping("/user/{id}")
 	@PreAuthorize("hasRole('ADMIN')")
-	public ResponseEntity<String> deleteUser(@PathVariable Long id) {
-		String usnm = u_svc.getById(id).getUsername();
+	public ResponseEntity<User> deleteUser(@PathVariable Long id) {
+		User user = u_svc.getById(id);
 		u_svc.deleteById(id);
-		return ResponseEntity.ok("** User " + usnm + " deleted succesfully **");
+		return ResponseEntity.ok(user);
 	}
 	
 	@DeleteMapping("/device/{id}")
 	@PreAuthorize("hasRole('ADMIN')")
-	public String deleteDevice(@PathVariable Long id) {
-		String name = d_svc.getById(id).getName();
+	public ResponseEntity<Device> deleteDevice(@PathVariable Long id) {
+		Device d = d_svc.getById(id);
 		d_svc.deleteById(id);
-		return "** Device " + name + " deleted succesfully **";
+		return ResponseEntity.ok(d);
 	}
 	
 	@PostMapping("/device/new/pc")
