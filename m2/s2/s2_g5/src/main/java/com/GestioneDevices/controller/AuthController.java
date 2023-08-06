@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.GestioneDevices.entity.User;
 import com.GestioneDevices.payload.JWTAuthResponse;
 import com.GestioneDevices.payload.LoginDto;
 import com.GestioneDevices.payload.RegisterDto;
@@ -34,14 +35,16 @@ public class AuthController {
         JWTAuthResponse jwtAuthResponse = new JWTAuthResponse();
         jwtAuthResponse.setUsername(loginDto.getUsername());
         jwtAuthResponse.setAccessToken(token);
+        jwtAuthResponse.setIsMod(authService.isMod(loginDto.getUsername()));
+        jwtAuthResponse.setIsAdmin(authService.isAdmin(loginDto.getUsername()));
 
         return ResponseEntity.ok(jwtAuthResponse);
     }
 
     // Build Register REST API
     @PostMapping(value = {"/register", "/signup"})
-    public ResponseEntity<String> register(@RequestBody RegisterDto registerDto){
-        String response = authService.register(registerDto);
-        return new ResponseEntity<>(response, HttpStatus.CREATED);
+    public ResponseEntity<User> register(@RequestBody RegisterDto registerDto){
+        User response = authService.register(registerDto);
+        return new ResponseEntity<User>(response, HttpStatus.CREATED);
     }
 }

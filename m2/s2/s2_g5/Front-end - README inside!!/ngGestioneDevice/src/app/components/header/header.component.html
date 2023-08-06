@@ -1,0 +1,14 @@
+<nav class="pt-2 pb-3 d-flex justify-content-between px-3 align-items-center border-bottom border-danger">
+    <h3 class="m-0 text-danger">Gestione Devices</h3>
+    <div class="d-flex">
+        <a class="text-decoration-none" [ngClass]="{ 'link-danger' : isHomePage(), 'link-secondary' : !isHomePage() }"
+            [routerLink]="['/']">Home</a>
+        <a class="text-decoration-none mx-3"
+            [ngClass]="{ 'link-danger' : isUsersPage(), 'link-secondary' : !isUsersPage() }"
+            [routerLink]="['/users']">Users</a>
+        <a class="text-decoration-none"
+            [ngClass]="{ 'link-danger' : isDevicesPage(), 'link-secondary' : !isDevicesPage() }"
+            [routerLink]="['/devices']">Devices</a>
+    </div>
+    <h6 class="m-0 text-danger">{{ loggedStr }}</h6>
+</nav>

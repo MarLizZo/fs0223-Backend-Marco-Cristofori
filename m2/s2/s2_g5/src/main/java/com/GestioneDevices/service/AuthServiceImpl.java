@@ -61,7 +61,7 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public String register(RegisterDto registerDto) {
+    public User register(RegisterDto registerDto) {
 
         // check if username exists in database
         if(userRepository.existsByUsername(registerDto.getUsername())){
@@ -86,10 +86,17 @@ public class AuthServiceImpl implements AuthService {
         List<Device> devices = new ArrayList<>();
         
         user.setRoles(roles);
-        userRepository.save(user);
-        System.out.println(user);
-
-        return "** User registered successfully **";
+        return userRepository.save(user);
+    }
+    
+    public boolean isMod(String username) {
+    	User u = userRepository.findByUsername(username).get();
+    	return u.getRoles().stream().anyMatch(r -> r.getRoleName().equals(ERole.ROLE_MODERATOR));
+    }
+    
+    public boolean isAdmin(String username) {
+    	User u = userRepository.findByUsername(username).get();
+    	return u.getRoles().stream().anyMatch(r -> r.getRoleName().equals(ERole.ROLE_ADMIN));
     }
     
     public ERole getRole(String role) {

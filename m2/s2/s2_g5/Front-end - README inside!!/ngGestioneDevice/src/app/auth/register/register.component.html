@@ -1,0 +1,30 @@
+<div class="mt-4">
+    <p *ngIf="message" class="text-center">{{ message }}</p>
+    <form class="row g-3 d-flex justify-content-center w-100" #f="ngForm">
+        <div class="col-8">
+            <label for="name">Name</label>
+            <input id="name" type="text" class="form-control bg-dark text-light border-danger rounded-3 shadow-none"
+                [(ngModel)]="data.name" name="name" required>
+        </div>
+        <div class="col-8">
+            <label for="name">Username</label>
+            <input id="username" type="text" class="form-control bg-dark text-light border-danger rounded-3 shadow-none"
+                [(ngModel)]="data.username" name="username" required>
+        </div>
+        <div class="col-8">
+            <label for="name">Email</label>
+            <input id="email" type="email" class="form-control bg-dark text-light border-danger rounded-3 shadow-none"
+                [(ngModel)]="data.email" name="email" required>
+        </div>
+        <div class="col-8">
+            <label for="name">Password</label>
+            <input id="password" type="password"
+                class="form-control bg-dark text-light border-danger rounded-3 shadow-none" [(ngModel)]="data.password"
+                name="password" required>
+        </div>
+        <div class="col-8 d-flex justify-content-center mt-4">
+            <button type="submit" [disabled]="f.invalid" class="btn btn-outline-danger w-50"
+                (click)="register()">Registrati</button>
+        </div>
+    </form>
+</div>

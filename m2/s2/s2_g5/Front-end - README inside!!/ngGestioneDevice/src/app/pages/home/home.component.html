@@ -1,0 +1,17 @@
+<div class="mt-4 d-flex flex-column align-items-center">
+    <div class="border-bottom border-black d-flex flex-column align-items-center w-100 pb-5">
+        <h3 class="mb-4">Autenticazione</h3>
+        <div class="d-flex w-75 justify-content-evenly">
+            <button class="btn btn-outline-danger px-4" [routerLink]="['/auth/login']">Login</button>
+            <button class="btn btn-outline-danger px-4" [routerLink]="['/auth/register']">Registrazione</button>
+        </div>
+    </div>
+    <div class="border-bottom border-black d-flex flex-column align-items-center w-100 pb-5 mt-4">
+        <h3 class="mb-4">Utenti</h3>
+        <button class="btn btn-outline-danger px-4" [routerLink]="['/users']">Gestione Utenti</button>
+    </div>
+    <div class="border-bottom border-black d-flex flex-column align-items-center w-100 pb-5 mt-4">
+        <h3 class="mb-4">Dispositivi</h3>
+        <button class="btn btn-outline-danger px-4" [routerLink]="['/devices']">Gestione Dispositivi</button>
+    </div>
+</div>
