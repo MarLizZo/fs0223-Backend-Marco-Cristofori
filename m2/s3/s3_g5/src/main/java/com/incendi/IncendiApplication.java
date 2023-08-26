@@ -18,6 +18,6 @@ public class IncendiApplication {
 				.latitude("00.00").longitude("00.01").build();
 		Sonda s1 = Sonda.builder().name("Safe Sonda").livelloFumo(0).edificio(e1).build();
 		s1.addObserver(obs);
-		s1.setLivelloFumo(3);
+		s1.setLivelloFumo(4);
 	}
 }

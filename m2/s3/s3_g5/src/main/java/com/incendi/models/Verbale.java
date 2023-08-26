@@ -13,4 +13,5 @@ public class Verbale {
     private Long id;
     private Integer livelloFumo;
     private LocalDate date;
+    private TeamPompieri team;
 }

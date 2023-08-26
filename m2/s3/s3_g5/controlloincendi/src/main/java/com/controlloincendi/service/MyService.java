@@ -21,18 +21,24 @@ public class MyService {
     @Autowired
     VerbaleRepo v_repo;
 
-    public TeamPompieri saveTeam(TeamPompieri t) {
-        if (t_repo.existsByName(t.getName())) {
-            return null;
-        } else {
-            return t_repo.save(t);
-        }
+    public TeamPompieri getById(Long id) {
+        return t_repo.existsById(id) ? t_repo.findById(id).get() : null;
     }
 
-    public void updateTeam(TeamPompieri t) {
+    public TeamPompieri saveTeam(TeamPompieri t) {
+        return t_repo.existsByName(t.getName()) ? null : t_repo.save(t);
+    }
+
+    public TeamPompieri updateTeam(TeamPompieri t) {
         if (t_repo.existsById(t.getId())) {
-            t_repo.save(t);
+            return t_repo.save(t);
         }
+        return null;
+    }
+
+    public TeamPompieri setIntervento(TeamPompieri t, Boolean flag) {
+        t.setBusy(false);
+        return updateTeam(t);
     }
 
     public Verbale saveVerbale(Verbale v) {

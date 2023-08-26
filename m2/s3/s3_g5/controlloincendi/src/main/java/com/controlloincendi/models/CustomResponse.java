@@ -11,5 +11,5 @@ public class CustomResponse {
     private String message;
     private Boolean intervento;
     private TeamPompieri team;
-    private Verbale varbale;
+    private Verbale verbale;
 }

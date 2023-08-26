@@ -1,4 +1,6 @@
-package com.incendi.models;
+package com.controlloincendi.models;
+
+import java.time.LocalDate;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,9 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Response {
+public class CustomResponseInt {
     private String message;
-    private Boolean intervento;
-    private TeamPompieri team;
-    private Verbale verbale;
+    private LocalDate date;
 }
